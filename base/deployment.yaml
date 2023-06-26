@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: arduino-greenhouse-client
+spec:
+  replicas: 1
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: arduino-greenhouse-client
+  template:
+    spec:
+      containers:
+      - image: arduino-greenhouse-client
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          successThreshold: 1
+          terminationGracePeriodSeconds: 60
+          timeoutSeconds: 10
+        name: arduino-greenhouse-client
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 90
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 10m
+            memory: 160Mi
+          requests:
+            cpu: 5m
+            memory: 80Mi
