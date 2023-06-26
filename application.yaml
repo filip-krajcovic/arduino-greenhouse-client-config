@@ -4,7 +4,7 @@ metadata:
   name: arduino-greenhouse-client
   namespace: argocd
 spec:
-  project: default
+  project: arduino
   source:
     repoURL: git@github.com:filip-krajcovic/arduino-greenhouse-client-config.git
     targetRevision: HEAD
