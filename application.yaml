@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: git@github.com:filip-krajcovic/arduino-greenhouse-client-config.git
     targetRevision: HEAD
-    path: overlays/dev
+    path: overlays/staging
   destination:
     server: https://kubernetes.default.svc
     namespace: arduino
