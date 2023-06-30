@@ -13,6 +13,13 @@ resources:
 - ../../base
 - ingress.yaml
 
+configMapGenerator:
+- name: arduino-greenhouse-client
+  envs:
+  - configurations/application.properties
+  options:
+    disableNameSuffixHash: true
+
 secretGenerator:
 - name: arduino-greenhouse-client-ca
   files:
