@@ -4,6 +4,10 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location /home {
+        try_files $uri $uri/ /index.html;
+      }
   name: arduino-greenhouse-client
 spec:
   ingressClassName: nginx
