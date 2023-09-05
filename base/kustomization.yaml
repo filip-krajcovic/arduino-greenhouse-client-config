@@ -14,7 +14,7 @@ commonLabels:
 images:
 - name: arduino-greenhouse-client
   newName: filipkrajcovic/arduino-greenhouse-client
-  newTag: 0.0.38
+  newTag: 0.0.39
 
 resources:
 - deployment.yaml
