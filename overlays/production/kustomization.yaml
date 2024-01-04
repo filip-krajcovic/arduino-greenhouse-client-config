@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: arduino
+
+commonLabels:
+  app.kubernetes.io/component: frontend
+  app.kubernetes.io/created-by: filip
+  app.kubernetes.io/managed-by: argo-cd
+  app.kubernetes.io/name: arduino-greenhouse-client
+
+resources:
+- ../../base
+- ingress.yaml
+
+configMapGenerator:
+- name: arduino-greenhouse-client
+  envs:
+  - configurations/application.properties
+  options:
+    disableNameSuffixHash: true
+
+secretGenerator:
+- name: arduino-greenhouse-client-ca
+  files:
+    - secrets/tls.crt
+    - secrets/tls.key
+  type: "kubernetes.io/tls"
+  options:
+    disableNameSuffixHash: true

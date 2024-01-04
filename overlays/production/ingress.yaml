@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/server-snippet: |
+      location /home {
+        try_files $uri $uri/ /index.html;
+      }
+  name: arduino-greenhouse-client
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: arduino.tiqra.online
+    http:
+      paths:
+      - backend:
+          service:
+            name: arduino-greenhouse-client
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - arduino.tiqra.online
+    secretName: arduino-greenhouse-client-ca
