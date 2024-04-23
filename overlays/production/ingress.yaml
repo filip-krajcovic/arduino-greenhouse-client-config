@@ -22,7 +22,18 @@ spec:
               number: 80
         path: /
         pathType: Prefix
+  - host: api.arduino.tiqra.online
+    http:
+      paths:
+      - backend:
+          service:
+            name: arduino-api
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
   tls:
   - hosts:
     - arduino.tiqra.online
+    - api.arduino.tiqra.online
     secretName: arduino-greenhouse-client-ca
